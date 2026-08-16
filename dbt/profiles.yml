@@ -1,0 +1,7 @@
+saas_subscription_data_platform:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: "../warehouse.duckdb"
+      threads: 4

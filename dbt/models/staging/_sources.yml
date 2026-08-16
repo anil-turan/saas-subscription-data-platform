@@ -1,0 +1,10 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    tables:
+      - name: plans
+      - name: crm_customers
+      - name: invoices
+      - name: usage_events
