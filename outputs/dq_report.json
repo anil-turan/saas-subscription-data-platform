@@ -1,0 +1,15 @@
+{
+  "crm_snapshot_volume": {
+    "n_days_checked": 14,
+    "mean_count": 500.0,
+    "std_count": 0.0,
+    "anomalies": [],
+    "status": "ok"
+  },
+  "invoice_quarantine_rate": {
+    "total_rows": 841,
+    "quarantined_rows": 29,
+    "quarantine_rate": 0.0345,
+    "status": "ok"
+  }
+}
