@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "saas-subscription-data-platform"
+version = "0.1.0"
+description = "Dagster-orchestrated dbt pipeline: SaaS CRM/billing/usage extracts -> a star schema with an SCD Type 2 customer dimension and monthly recurring revenue"
+requires-python = ">=3.11"
+dependencies = [
+    "dagster>=1.13",
+    "dagster-webserver>=1.13",
+    "dagster-dbt>=0.29",
+    "dbt-core>=1.11",
+    "dbt-duckdb>=1.11",
+    "duckdb>=1.5",
+    "pandas>=2.2",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.4",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["dagster_project*", "data_gen*"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
