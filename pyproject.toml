@@ -23,6 +23,8 @@ dev = [
     "pytest>=8.0",
     "pytest-cov>=5.0",
     "ruff>=0.4",
+    # only for docs/make_readme_charts.py -- the pipeline itself needs no plotting
+    "matplotlib>=3.8",
 ]
 
 [tool.setuptools.packages.find]

@@ -97,6 +97,9 @@ saas-subscription-data-platform/
 │   ├── models/marts/              # dim_customer, dim_plan, dim_date, fact_invoice(+_rejected), fact_usage_daily, mrr_monthly
 │   ├── tests/                     # 3 custom singular tests -- see Results
 │   └── dbt_project.yml
+├── docs/
+│   ├── make_readme_charts.py      # renders the two README figures by querying the built warehouse
+│   └── images/                    # the rendered figures (committed; regenerate after a pipeline change)
 ├── tests/                         # 17 pytest tests: generator determinism/patterns, DQ-check unit tests
 └── pyproject.toml
 ```
@@ -106,6 +109,8 @@ saas-subscription-data-platform/
 ## Results (real, from an executed run)
 
 ### Data quality, end to end
+
+![Invoice rows from raw CSV to fact table and quarantine: 858 raw, 841 after dedup, 812 in fact_invoice, 29 quarantined](docs/images/invoice_pipeline.png)
 
 | Stage | Input | Output | What happened |
 |---|---|---|---|
@@ -134,6 +139,8 @@ window — 3.1% of customer-days, matching the generator's documented
 `DAILY_CHANGE_RATE`).
 
 ### mrr_monthly
+
+![Monthly recurring revenue by plan tier, split by customer segment, from the mrr_monthly mart](docs/images/mrr_monthly.png)
 
 12 rows (4 plan tiers × 3 segments), computed only from `status_clean =
 'paid'` invoices — the flagged-for-review rows are excluded from revenue
@@ -165,6 +172,9 @@ DAGSTER_HOME="$(pwd)/.dagster_home" dagster dev -m dagster_project.definitions
 
 # 6. run the tests
 pytest tests/ -v
+
+# 7. (optional) re-render the README figures from the warehouse you just built
+python3 docs/make_readme_charts.py
 ```
 
 ---
